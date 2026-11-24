@@ -1,4 +1,4 @@
-"""Unit-Tests für validate_flowchart.py (Abnahmekontrakt: 22 Tests)."""
+"""Unit-Tests für validate_flowchart.py (Abnahmekontrakt: 24 Tests)."""
 
 import contextlib
 import io
@@ -84,6 +84,15 @@ class Fehlerregeln(unittest.TestCase):
 
     def test_e07_leerer_text(self):
         self.assertCode(rumpf('schritt --> leer[""]'), "E07")
+
+    def test_e08_styling_anweisungen(self):
+        for zeile in ('style schritt fill:#f00', 'classDef rot fill:#f00', 'class schritt rot',
+                      'linkStyle 0 stroke:#f00', 'subgraph gruppe["Gruppe"]'):
+            with self.subTest(zeile=zeile):
+                self.assertCode(rumpf(zeile), "E08")
+
+    def test_e08_klassen_kurzform(self):
+        self.assertCode(rumpf('schritt --> weiter["Weiter"]:::rot'), "E08")
 
 
 class Warnregeln(unittest.TestCase):

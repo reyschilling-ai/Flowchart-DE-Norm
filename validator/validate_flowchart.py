@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validator für Mermaid-Flussdiagramme nach DIN ISO 5807 (Projekt Flowchart-DE-Norm).
 
-Prüft eine .mmd-Datei gegen die Fehlerregeln E01–E07 und die Warnregeln W01–W05.
+Prüft eine .mmd-Datei gegen die Fehlerregeln E01–E08 und die Warnregeln W01–W05.
 Verwendet ausschließlich die Python-Standardbibliothek.
 
 Aufruf:
@@ -28,6 +28,7 @@ MELDUNGEN = {
     "E05": "Dicker Pfeil '==>' bzw. '===' ist verboten",
     "E06": "Runde-Klammer-Syntax 'id(...)' ist verboten (erlaubt sind id([\"...\"]) und id((\"...\")))",
     "E07": "Knoten mit leerem Beschriftungstext",
+    "E08": "Styling-Anweisung gefunden (style, classDef, class, linkStyle, subgraph, ':::' sind verboten)",
     "W01": "Unsprechende Knoten-ID (sprechende, kleingeschriebene IDs verwenden)",
     "W02": "Fallback-Symbol verwendet (Mermaid kennt keine Normform dafür)",
     "W03": "Kantenbeschriftung länger als 20 Zeichen",
@@ -62,6 +63,8 @@ OPERATOR_RE = re.compile(r"-\.->|==>|===|-->|---")
 ID_TOKEN_RE = re.compile(r"[A-Za-z_][\w]*")
 ANFUEHRUNG_RE = re.compile(r'"[^"]*"')
 PIPE_RE = re.compile(r"\|[^|]*\|")
+STYLING_RE = re.compile(r"^\s*(style|classDef|class|linkStyle|subgraph)\b")
+KLASSEN_KURZFORM_RE = re.compile(r":::")
 
 
 @dataclass
@@ -113,6 +116,12 @@ def validiere_text(text):
                 bericht.fehler.append(("E01", nr, "gefunden: '%s'" % zeile.strip()))
             continue
 
+        # E08: Styling-Anweisungen
+        styling = STYLING_RE.match(zeile)
+        if styling:
+            bericht.fehler.append(("E08", nr, "Anweisung '%s'" % styling.group(1)))
+            continue
+
         # Knotendefinitionen
         spannen = []
         for t in KNOTEN_RE.finditer(zeile):
@@ -133,6 +142,9 @@ def validiere_text(text):
         maskiert = _maskieren(maskiert, [m.span() for m in ANFUEHRUNG_RE.finditer(maskiert)])
         pipes = [m.span() for m in PIPE_RE.finditer(maskiert)]
         maskiert = _maskieren(maskiert, pipes)
+
+        if KLASSEN_KURZFORM_RE.search(maskiert):
+            bericht.fehler.append(("E08", nr, "Klassen-Kurzform ':::'"))
 
         # E06: id( ohne folgendes [ oder (
         for t in RUNDE_KLAMMER_RE.finditer(maskiert):
@@ -223,7 +235,7 @@ def _ausgabe(bericht, strict):
 def main(argv=None):
     parser = argparse.ArgumentParser(
         prog="validate_flowchart.py",
-        description="Prüft Mermaid-Flussdiagramme gegen DIN ISO 5807 (Regeln E01–E07, W01–W05).",
+        description="Prüft Mermaid-Flussdiagramme gegen DIN ISO 5807 (Regeln E01–E08, W01–W05).",
     )
     parser.add_argument("datei", help="Pfad zur .mmd-Datei")
     parser.add_argument("--strict", action="store_true", help="Warnungen als Fehler werten")

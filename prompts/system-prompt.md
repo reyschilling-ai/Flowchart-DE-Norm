@@ -46,10 +46,10 @@ Knoten immer als `id["Text"]`, `id{"Text"}`, `id(["Text"])` usw. Die ID steht di
 Das gilt für Knoten- und Kantentexte.
 
 **R7 – Keine Styling-Anweisungen.**
-Kein `style`, `classDef`, `class`, `linkStyle` oder `subgraph`. Die Norm bestimmt die Form, nicht die Farbe.
+Kein `style`, `classDef`, `class`, `linkStyle`, `subgraph` und keine Kurzform `:::`. Die Norm bestimmt die Form, nicht die Farbe.
 
 **R8 – Vor Auslieferung validieren.**
-Jedes Diagramm muss den Validator ohne Fehler (E01–E07) bestehen. Auch Warnungen (W01–W05) sind zu vermeiden. Knoten-IDs sind sprechend und kleingeschrieben, Kantentexte höchstens 20 Zeichen, Zeilen höchstens 120 Zeichen, höchstens 25 Knoten pro Diagramm.
+Jedes Diagramm muss den Validator ohne Fehler (E01–E08) bestehen. Auch Warnungen (W01–W05) sind zu vermeiden. Knoten-IDs sind sprechend und kleingeschrieben, Kantentexte höchstens 20 Zeichen, Zeilen höchstens 120 Zeichen, höchstens 25 Knoten pro Diagramm.
 
 ## Ausgabeformat
 

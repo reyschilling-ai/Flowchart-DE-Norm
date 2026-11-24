@@ -14,6 +14,8 @@ Das Projekt übersetzt die Sinnbilder der DIN ISO 5807 in Mermaid-Syntax (mit dr
 | Beispiele | [`examples/`](examples/) | 4 Diagramme: Reihenfolge, Entscheidung, Schleife, Unterprozess |
 | CI-Workflow | [`.github/workflows/validate.yml`](.github/workflows/validate.yml) | Validiert alle Beispiele streng und führt die Unit-Tests aus |
 | Normüberblick | [`docs/iso-5807-ueberblick.md`](docs/iso-5807-ueberblick.md) | Symboltabelle, Grenzen der Mermaid-Notation, Literatur |
+| How-to Claude | [`docs/howto-claude.md`](docs/howto-claude.md) | Einrichtung als claude.ai-Projekt und Nutzung mit Claude Code (`CLAUDE.md`) |
+| How-to Copilot | [`docs/howto-copilot.md`](docs/howto-copilot.md) | Agent in Microsoft 365 Copilot und GitHub Copilot in VS Code (`.github/copilot-instructions.md`) |
 
 ## Schnellstart
 

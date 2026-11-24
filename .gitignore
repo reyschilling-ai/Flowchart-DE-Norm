@@ -1,0 +1,18 @@
+# Python-Artefakte
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Build- und Testverzeichnisse
+dist/
+build/
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Editor- und Systemdateien
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

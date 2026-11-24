@@ -1,0 +1,5 @@
+flowchart TD
+    start(["Start"]) --> eingabe[/"Bestellmenge erfassen"/]
+    eingabe --> pruefung["Verfügbarkeit prüfen"]
+    pruefung --> versand["Versand auslösen"]
+    versand --> ende(["Ende"])

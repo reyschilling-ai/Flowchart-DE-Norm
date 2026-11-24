@@ -1,0 +1,7 @@
+flowchart TD
+    start(["Start"]) --> eingang[/"Kundendaten einlesen"/]
+    eingang --> berechnung[["Tarif berechnen"]]
+    berechnung --> speicher[("Tariftabelle")]
+    speicher --> beleg["Versicherungsschein erzeugen"]
+    beleg --> versand["Versicherungsschein versenden"]
+    versand --> ende(["Ende"])

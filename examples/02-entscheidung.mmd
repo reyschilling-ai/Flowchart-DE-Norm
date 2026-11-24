@@ -1,0 +1,8 @@
+flowchart TD
+    start(["Start"]) --> auftrag["Auftrag erfassen"]
+    auftrag --> freigabe{"Freigabe erteilt?"}
+    freigabe -->|"Ja"| ausfuehren["Auftrag ausführen"]
+    freigabe -->|"Nein"| ablehnen["Auftrag ablehnen"]
+    ausfuehren --> buchen["Auftrag buchen"]
+    buchen --> ende(["Ende"])
+    ablehnen --> ende

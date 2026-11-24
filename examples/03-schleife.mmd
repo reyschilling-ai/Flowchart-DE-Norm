@@ -1,0 +1,8 @@
+flowchart TD
+    start(["Start"]) --> init{{"Zähler initialisieren"}}
+    init --> bedingung{"Noch Zeichen vorhanden?"}
+    bedingung -->|"Ja"| verarbeiten["Zeichen verarbeiten"]
+    verarbeiten --> hochzaehlen["Zähler erhöhen"]
+    hochzaehlen --> bedingung
+    bedingung -->|"Nein"| abschluss["Ergebnis ausgeben"]
+    abschluss --> ende(["Ende"])

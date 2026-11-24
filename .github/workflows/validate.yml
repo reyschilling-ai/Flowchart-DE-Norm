@@ -1,0 +1,26 @@
+name: Flowcharts validieren
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Beispiele streng validieren
+        run: |
+          for datei in examples/*.mmd; do
+            python3 validator/validate_flowchart.py "$datei" --strict
+          done
+
+      - name: Unit-Tests ausführen
+        run: python3 -m unittest discover -s validator/tests -p 'test_*.py' -v

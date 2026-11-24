@@ -1,0 +1,233 @@
+{
+    "norm": "DIN ISO 5807 / ISO 5807:1985",
+    "version": "1.0.0",
+    "sprache": "de",
+    "beschreibung": "ISO-5807-Symbolmengen mit Syntax für Mermaid und draw.io.",
+    "konventionen": {
+        "knoten_ids": "sprechende, kleingeschriebene Bezeichner (z. B. 'pruefung', nicht 'B2')",
+        "texte": "immer in doppelten Anführungszeichen",
+        "richtung": "flowchart TD"
+    },
+    "symbole": [
+        {
+            "id": "terminator",
+            "name": "Terminator (Anfang/Ende)",
+            "bedeutung": "Start- und Endpunkt des Ablaufs.",
+            "mermaid": {
+                "syntax": "id([\"Text\"])",
+                "beispiel": "start([\"Start\"])"
+            },
+            "drawio": {
+                "stil": "rounded=1;whiteSpace=wrap;html=1;arcSize=50;",
+                "form": "Stadion / abgerundetes Rechteck"
+            },
+            "regeln": [
+                "Genau ein Start-Terminator mit Start, Anfang oder Beginn (E02)",
+                "Mindestens ein Ende-Terminator mit Ende, Stop, Abbruch, Abschluss oder Fertig (E03)"
+            ]
+        },
+        {
+            "id": "prozess",
+            "name": "Prozess",
+            "bedeutung": "Ein einzelner Verarbeitungsschritt, eine Tätigkeit.",
+            "mermaid": {
+                "syntax": "id[\"Text\"]",
+                "beispiel": "pruefung[\"Verfügbarkeit prüfen\"]"
+            },
+            "drawio": {
+                "stil": "rounded=0;whiteSpace=wrap;html=1;",
+                "form": "Rechteck"
+            },
+            "regeln": [
+                "Text nicht leer (E07)",
+                "Text in doppelten Anführungszeichen (R6)"
+            ]
+        },
+        {
+            "id": "entscheidung",
+            "name": "Entscheidung",
+            "bedeutung": "Bedingung mit Fragestellung, immer mit „?“ formuliert.",
+            "mermaid": {
+                "syntax": "id{\"Text\"}",
+                "beispiel": "freigabe{\"Freigabe erteilt?\"}"
+            },
+            "drawio": {
+                "stil": "rhombus;whiteSpace=wrap;html=1;",
+                "form": "Raute"
+            },
+            "regeln": [
+                "Mindestens zwei ausgehende Kanten (E04)",
+                "Jede ausgehende Kante mit Ja/Nein bzw. Wahr/Falsch beschriftet (E04)"
+            ]
+        },
+        {
+            "id": "daten",
+            "name": "Daten (Ein-/Ausgabe)",
+            "bedeutung": "Eingabe- oder Ausgabedaten (erfasst, gelesen, ausgegeben).",
+            "mermaid": {
+                "syntax": "id[/\"Text\"/]",
+                "beispiel": "eingabe[/\"Bestellmenge erfassen\"/]"
+            },
+            "drawio": {
+                "stil": "shape=parallelogram;whiteSpace=wrap;html=1;",
+                "form": "Parallelogramm"
+            },
+            "regeln": [
+                "Text nicht leer (E07)"
+            ]
+        },
+        {
+            "id": "vordefinierter_prozess",
+            "name": "Vordefinierter Prozess",
+            "bedeutung": "Eine an anderer Stelle definierte, hier nur benannte Teilaufgabe.",
+            "mermaid": {
+                "syntax": "id[[\"Text\"]]",
+                "beispiel": "berechnung[[\"Tarif berechnen\"]]"
+            },
+            "drawio": {
+                "stil": "shape=process;whiteSpace=wrap;html=1;",
+                "form": "Rechteck mit Doppelstrichen an den Seiten"
+            },
+            "regeln": [
+                "Text nicht leer (E07)"
+            ]
+        },
+        {
+            "id": "vorbereitung",
+            "name": "Vorbereitung",
+            "bedeutung": "Initialisierung, Schleifenvorbereitung (Zähler, Startwerte).",
+            "mermaid": {
+                "syntax": "id{{\"Text\"}}",
+                "beispiel": "init{{\"Zähler initialisieren\"}}"
+            },
+            "drawio": {
+                "stil": "shape=hexagon;whiteSpace=wrap;html=1;fixedSize=1;size=20;",
+                "form": "Sechseck"
+            },
+            "regeln": [
+                "Text nicht leer (E07)"
+            ]
+        },
+        {
+            "id": "datenspeicher",
+            "name": "Datenspeicher",
+            "bedeutung": "Gespeicherter, später wieder gelesener Datenbestand.",
+            "mermaid": {
+                "syntax": "id[(\"Text\")]",
+                "beispiel": "speicher[(\"Tariftabelle\")]"
+            },
+            "drawio": {
+                "stil": "shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;",
+                "form": "Zylinder"
+            },
+            "regeln": [
+                "Text nicht leer (E07)"
+            ]
+        },
+        {
+            "id": "verbinder",
+            "name": "Verbinder",
+            "bedeutung": "Fortsetzung des Ablaufs an derselben Seite/Struktur.",
+            "mermaid": {
+                "syntax": "id((\"Text\"))",
+                "beispiel": "kreis((\"K1\"))"
+            },
+            "drawio": {
+                "stil": "ellipse;whiteSpace=wrap;html=1;fixedSize=1;size=40;",
+                "form": "Kreis"
+            },
+            "regeln": [
+                "Doppelte runde Klammer ist zulässig und löst kein E06 aus"
+            ]
+        },
+        {
+            "id": "dokument",
+            "name": "Dokument",
+            "bedeutung": "Ausgabe als Papierdokument/Datei.",
+            "mermaid": {
+                "syntax": "id[\"📄 Text\"]",
+                "beispiel": "dokument[\"📄 Rechnung\"]",
+                "fallback": true,
+                "hinweis": "Mermaid hat keine native Dokumentform; Rechteck mit 📄-Präfix. Löst W02 aus."
+            },
+            "drawio": {
+                "stil": "shape=document;whiteSpace=wrap;html=1;size=0.35;",
+                "form": "Rechteck mit gewellter Unterkante"
+            },
+            "regeln": [
+                "Fallback-Symbol, löst W02 aus"
+            ]
+        },
+        {
+            "id": "manuelle_eingabe",
+            "name": "Manuelle Eingabe",
+            "bedeutung": "Eingabe durch einen Bediener.",
+            "mermaid": {
+                "syntax": "id[\"Manuell: Text\"]",
+                "beispiel": "erfassung[\"Manuell: Auftrag erfassen\"]",
+                "fallback": true,
+                "hinweis": "Mermaid hat keine native Trapezform in Normlage; Rechteck mit Präfix „Manuell:“. Löst W02 aus."
+            },
+            "drawio": {
+                "stil": "shape=trapezoid;whiteSpace=wrap;html=1;fixedSize=1;size=20;",
+                "form": "Trapez"
+            },
+            "regeln": [
+                "Fallback-Symbol, löst W02 aus"
+            ]
+        },
+        {
+            "id": "anzeige",
+            "name": "Anzeige",
+            "bedeutung": "Online-Anzeige für den Bediener.",
+            "mermaid": {
+                "syntax": "id[\"Anzeige: Text\"]",
+                "beispiel": "status[\"Anzeige: Status zeigen\"]",
+                "fallback": true,
+                "hinweis": "Mermaid hat keine native Anzeigeform; Rechteck mit Präfix „Anzeige:“. Löst W02 aus."
+            },
+            "drawio": {
+                "stil": "shape=display;whiteSpace=wrap;html=1;",
+                "form": "Anzeigeform (gebogenes Display)"
+            },
+            "regeln": [
+                "Fallback-Symbol, löst W02 aus"
+            ]
+        }
+    ],
+    "flusslinien": [
+        {
+            "id": "ablauflinie",
+            "name": "Ablauflinie",
+            "bedeutung": "Durchgezogene Linie für den Standard-Kontrollfluss; Pfeilspitze immer in Flussrichtung.",
+            "mermaid": {
+                "syntax": "a --> b",
+                "beispiel": "freigabe -->|\"Ja\"| ausfuehren"
+            },
+            "drawio": {
+                "stil": "edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;",
+                "form": "durchgezogene Linie mit Pfeilspitze"
+            },
+            "regeln": [
+                "Keine dicken Pfeile ==> oder === (E05)",
+                "Beschriftung höchstens 20 Zeichen (W03)"
+            ]
+        },
+        {
+            "id": "informationslinie",
+            "name": "Informationslinie",
+            "bedeutung": "Gestrichelte Linie für Informations- und Datenfluss.",
+            "mermaid": {
+                "syntax": "a -.-> b",
+                "beispiel": "speicher -.->|\"Referenz\"| berechnung"
+            },
+            "drawio": {
+                "stil": "edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;dashed=1;",
+                "form": "gestrichelte Linie mit Pfeilspitze"
+            },
+            "regeln": [
+                "Beschriftung höchstens 20 Zeichen (W03)"
+            ]
+        }
+    ]
+}
